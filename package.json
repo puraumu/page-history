@@ -6,10 +6,10 @@
   , "author": "puraumu"
   , "dependencies": {}
   , "devDependencies": {
-    , "should": "*"
+      "should": "*"
     , "mocha": "*"
   }
-  , "main": "./lib/history"
+  , "main": "./index"
   , "engines": { "node": "*" }
 }
 
