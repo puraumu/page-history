@@ -1,0 +1,15 @@
+{
+    "name": "page-history"
+  , "version": "0.0.1"
+  , "description": "remember page history"
+  , "keywords": ["history", "page"]
+  , "author": "puraumu"
+  , "dependencies": {}
+  , "devDependencies": {
+    , "should": "*"
+    , "mocha": "*"
+  }
+  , "main": "./lib/history"
+  , "engines": { "node": "*" }
+}
+
