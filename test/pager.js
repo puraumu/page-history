@@ -1,6 +1,6 @@
 var Pager = require('../')
   , pager = new Pager()
-  , page = ['foo', 'bar', 'baz', 'hoge', 'pager', 'history', 'js']
+  , page = ['foo', 'bar', 'baz', 'hoge', 'FOO', 'BAR', 'HOGE']
 
 describe('Pager', function(){
 
@@ -33,9 +33,9 @@ describe('Pager', function(){
     })
   })
 
-  describe('.push()', function(){
-    it('should', function(){
-      pager.push('node').page[--pager.len].should.eql('node')
+  describe('.now()', function(){
+    it('should return current page', function(){
+      pager.now().should.eql('baz')
     })
   })
 
@@ -45,14 +45,14 @@ describe('Pager', function(){
     })
   })
 
-  describe('.now()', function(){
-    it('should return current page', function(){
-      pager.now().should.eql(2)
+  describe('.push()', function(){
+    it('should', function(){
+      pager.push('node').page[--pager.len].should.eql('node')
     })
   })
 
   describe('.remvoe()', function(){
-    it('should remove the page of index', function(){
+    it('should remove the page at index', function(){
       pager.remove(0).page[0].should.eql('bar')
     })
   })
@@ -66,6 +66,24 @@ describe('Pager', function(){
   describe('.set()', function(){
     it('should', function(){
     })
+  })
+
+  describe('events', function(){
+
+    // TODO 0?
+    // console.log(pager.now(), pager.cwp);
+    describe('add', function(){
+      it('should return added item', function(done){
+        pager.on('add', function(item){
+          item.should.eql('foo')
+          done();
+        });
+        pager.push('foo');
+      })
+      it('should', function(){
+      })
+    })
+
   })
 
 })
