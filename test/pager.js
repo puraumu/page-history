@@ -17,89 +17,259 @@ describe('Pager', function(){
     })
   })
 
-  describe('.move()', function(){
-    it('should move to specified page', function(){
+  describe('.move() to specified page.', function(){
+    it('should change cwp', function(){
       pager.move(2).cwp.should.eql(2)
     })
-    it('should move to the page relatively', function(){
-      pager.move(2, true).cwp.should.eql(4)
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.move(4).cwp.should.eql(4)
+      pager.len.should.eql(len)
     })
-    it('should not be smaller than 0', function(){
-      pager.move(0).move(-1, true).cwp.should.eql(0)
-    })
-    it('should nto be bigger than Pager.len', function(){
-      pager.move(pager.len - 1).move(1, true).cwp.should.eql(pager.len - 1)
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.move(3).cwp.should.eql(3)
+      pager.page.should.eql(page)
     })
   })
 
-  describe('.next()', function(){
-    it('should return the next item', function(){
-      pager.move(2).next().should.eql('hoge')
+  describe('.move() to the page relatively.', function(){
+    it('should change cwp', function(){
+      pager.move(0)
+      pager.move(1, true).cwp.should.eql(1)
     })
-    it('should stop when cwp is end of the page', function(){
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.move(1, true).cwp.should.eql(2)
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.move(-2, true).cwp.should.eql(0)
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.move(), cwp should not be smaller than 0.', function(){
+    it('should change cwp', function(){
+      pager.move(0).move(-1, true).cwp.should.eql(0)
+    })
+    it('should not change len', function(){
+      var len = pager.len, cwp = pager.cwp;
+      pager.move(-1, true)
+      pager.cwp.should.eql(0)
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page, cwp = pager.cwp;
+      pager.move(-22, true)
+      pager.cwp.should.eql(0)
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.move(), cwp should not be bigger than `Pager`.len.', function(){
+    it('should change cwp', function(){
+      pager.move(pager.len - 1).move(1, true).cwp.should.eql(pager.len - 1)
+    })
+    it('should not change len', function(){
+      var len = pager.len, cwp = pager.cwp;
+      pager.move(456, true)
+      pager.cwp.should.eql(pager.len - 1)
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.move(1, true)
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.next() returns the next item', function(){
+    it('should change cwp', function(){
+      pager.move(2).next().should.eql('hoge')
+      pager.cwp.should.eql(3)
+    })
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.next().should.eql('FOO')
+      pager.cwp.should.eql(4)
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.next().should.eql('BAR')
+      pager.cwp.should.eql(5)
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.next() should stop when cwp is end of the page', function(){
+    it('should change cwp', function(){
       should.strictEqual(pager.move(pager.len - 1).next(), undefined)
       pager.cwp.should.eql(pager.len - 1)
     })
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.move(pager.len - 1).next()
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.move(pager.len - 1).next()
+      pager.page.should.eql(page)
+    })
   })
 
-  describe('.back()', function(){
-    it('should return the previous item', function(){
+  describe('.back() to the previous item', function(){
+    it('should change cwp', function(){
       pager.move(3).back().should.eql('baz')
+      pager.cwp.should.eql(2)
     })
-    it('should stop when cwp is top of the page', function(){
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.back().should.eql('bar')
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.back().should.eql('foo')
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.back() should stop at top of the page', function(){
+    it('should change cwp', function(){
       should.strictEqual(pager.move(0).back(), undefined)
       pager.cwp.should.eql(0)
     })
-  })
-
-  describe('.now()', function(){
-    it('should return current page', function(){
-      pager.move(1).now().should.eql('bar')
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.move(0).back()
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.move(0).back()
+      pager.page.should.eql(page)
     })
   })
 
-  describe('.index()', function(){
-    it('should return the page of index', function(){
+  describe('.now() returns current page', function(){
+    it('should not change cwp', function(){
+      var cwp = pager.cwp;
+      pager.now().should.eql('foo')
+      pager.cwp.should.eql(cwp)
+    })
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.now()
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.now().should.eql('foo')
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.index() returns the page of index', function(){
+    it('should not change cwp', function(){
+      var cwp = pager.cwp;
       pager.index('hoge').should.eql(3)
+      pager.cwp.should.eql(cwp)
+    })
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.index('HOGE').should.eql(6)
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.index('foo').should.eql(0)
+      pager.page.should.eql(page)
+    })
+  })
+
+  describe('.action() registers an action', function(){
+    it('should not change cwp', function(){
+      var cwp = pager.cwp;
+      pager.action('next')._action.should.eql('next')
+      pager.cwp.should.eql(cwp)
+    })
+    it('should not change len', function(){
+      var len = pager.len;
+      pager.action('hoge')._action.should.eql('hoge')
+      pager.len.should.eql(len)
+    })
+    it('should not change page', function(){
+      var page = pager.page;
+      pager.action('')._action.should.eql('')
+      pager.page.should.eql(page)
     })
   })
 
   describe('.action()', function(){
-    it('should register an action', function(){
-      pager.action('next')._action.should.eql('next')
-    })
     it('should not invoke noop', function(){
       // => events
     })
   })
 
-  describe('.push()', function(){
-    it('should add a new page', function(){
-      var len = pager.len;
+  describe('.push() adds a new page.', function(){
+    it('should not change cwp', function(){
+      var cwp = pager.cwp;
       pager.push('node')
-      len += 1
-      pager.page[len -1].should.eql('node')
-      len.should.eql(pager.len)
+      pager.cwp.should.eql(cwp)
     })
-    it('should add new multiple pages', function(){
+    it('should change len', function(){
       var len = pager.len;
-      pager.push(['ssh:', 'ftp:'])
-      len += 2
-      pager.page[len - 1].should.eql('ftp:')
-      pager.page[len - 2].should.eql('ssh:')
-      len.should.eql(pager.len)
+      pager.push('')
+      pager.len.should.eql(len + 1)
+    })
+    it('should change page', function(){
+      var page = pager.page;
+      pager.push('javascript')
+      // page.push('javascript') // Array push
+      pager.page.should.eql(page)
+      pager.page[pager.len -1].should.eql('javascript')
     })
   })
 
+  describe('.push() adds new multiple pages.', function(){
+    it('should not change cwp', function(){
+      var cwp = pager.cwp;
+      pager.push(['http://nodejs.org/', 'https://github.com/'])
+      pager.cwp.should.eql(cwp)
+    })
+    it('should change len', function(){
+      var len = pager.len;
+      pager.push(['', ''])
+      pager.len.should.eql(len + 2)
+    })
+    it('should change page', function(){
+      var page = pager.page;
+      pager.push([2, 90])
+      // page.push([90, 34]) // Array push
+      pager.page.should.eql(page)
+      pager.page[pager.len - 1].should.eql(90)
+    })
+  })
+
+  // ===
   describe('.remvoe()', function(){
     it('should remove the page at index', function(){
+      var len = pager.len, cwp = pager.cwp;
       pager.remove(0).page[0].should.eql('bar')
+      pager.cwp.should.eql(cwp)
+      pager.len.should.eql(len - 1)
     })
   })
 
   describe('.add()', function(){
     it('should add the page to index', function(){
+      var len = pager.len;
       pager.add(0, 'http').page[0].should.eql('http')
+      ;(len + 1).should.eql(pager.len)
     })
   })
 
@@ -138,9 +308,9 @@ describe('Pager', function(){
       it('should return added item', function(done){
         pager.on('add', function(item){
           item.should.eql('foo')
-          done();
-        });
-        pager.push('foo');
+          done()
+        })
+        pager.push('foo')
       })
       it('should', function(){
       })
