@@ -193,8 +193,30 @@ describe('Pager Events', function(){
   })
 
   describe('change', function(){
-    // it('should', function(done){
-    // })
+    it('should return arguments at any time #1 succeed', function(done){
+      pager.once('change', function(d, i){
+        d.should.eql('foo')
+        i.should.eql(2)
+        done()
+      })
+      pager.set(2, 'foo')
+    })
+    it('should return arguments at any time #2 out of range', function(done){
+      pager.once('change', function(d, i){
+        d.should.eql('bar')
+        i.should.eql(-1)
+        done()
+      })
+      pager.set(-1, 'bar')
+    })
+    it('should return arguments at any time #3 out of range', function(done){
+      pager.once('change', function(d, i){
+        d.should.eql('hoge')
+        i.should.eql(3958)
+        done()
+      })
+      pager.set(3958, 'hoge')
+    })
   })
 
 })
