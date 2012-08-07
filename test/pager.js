@@ -7,10 +7,6 @@ var assert = require('assert')
 describe('Pager', function(){
 
   describe('new', function(){
-    it('should ignore none Array', function(){
-      pager = new Pager({foo: 'bar'});
-      pager.page.should.be.empty;
-    })
     it('should read arument', function(){
       pager = new Pager(page);
       pager.page.should.not.be.empty;
