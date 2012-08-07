@@ -98,7 +98,29 @@ describe('Pager', function(){
   })
 
   describe('.set()', function(){
-    it('should', function(){
+    it('should set data to the page', function(){
+      pager.set(1, 'foo').stack[1].should.eql('foo')
+    })
+  })
+
+  describe('.get()', function(){
+    it('should get data at the page', function(){
+      pager.set(2, 99).get(2).should.eql(99)
+    })
+  })
+
+  describe('.search()', function(){
+    it('should return matched index of page', function(){
+      pager.search(99)[0].should.eql(2)
+    })
+    it('should return matched index of page by RegExp', function(){
+      pager.search('o$')[0].should.eql(1)
+    })
+  })
+
+  describe('.export()', function(){
+    it('should return all items in the stack', function(){
+      pager.export().should.have.length(2)
     })
   })
 
