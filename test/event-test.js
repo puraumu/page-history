@@ -26,10 +26,13 @@ describe('Pager Events', function(){
       pager.on('move', function(d, i){
         d.should.eql('HOGE')
         i.should.eql(6)
+        false.should.be.true
       })
       pager.move(456632)
-      pager.removeAllListeners('move')
-      done()
+      setTimeout(function(){
+        pager.removeAllListeners('move')
+        done()
+      }, 50)
     })
     it('should return current page #2', function(done){
       pager.move(4)
@@ -155,8 +158,38 @@ describe('Pager Events', function(){
   })
 
   describe('remove', function(){
-    // it('should', function(done){
-    // })
+    it('should return a removed item #1', function(done){
+      pager.once('remove', function(d, i){
+        d.should.eql('sftp:')
+        i.should.eql(0)
+        done()
+      })
+      pager.remove(0)
+    })
+    it('should not emit event if attempt to remove from out of range #1', function(done){
+      pager.once('remove', function(d, i){
+        console.log('no message');
+        d.should.eql('sftp:')
+        i.should.eql(0)
+      })
+      pager.remove(-1)
+      setTimeout(function(){
+        pager.removeAllListeners('remove')
+        done()
+      }, 50)
+    })
+    it('should not emit event if attempt to remove from out of range #2', function(done){
+      pager.once('remove', function(d, i){
+        console.log('no message');
+        d.should.eql('sftp:')
+        true.should.be.false
+      })
+      pager.remove(93853)
+      setTimeout(function(){
+        pager.removeAllListeners('remove')
+        done()
+      }, 50)
+    })
   })
 
   describe('change', function(){
