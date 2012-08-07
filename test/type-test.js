@@ -76,12 +76,12 @@ describe('Pager TypeCheck', function(){
     it('3.14', function(){
       var len = pager.len;
       pager.add(3.14, new Date).cwp.should.eql(6)
-      // pager.len.should.eql(len + 1)
+      pager.len.should.eql(len + 1)
     })
     it('Date Object', function(){
       var len = pager.len;
       pager.add(new Date, 3.14).cwp.should.eql(6)
-      // pager.len.should.eql(len)
+      pager.len.should.eql(len)
     })
   })
 

@@ -360,22 +360,4 @@ describe('Pager', function(){
     })
   })
 
-  describe('events', function(){
-
-    // TODO 0?
-    // console.log(pager.now(), pager.cwp);
-    describe('add', function(){
-      it('should return added item', function(done){
-        pager.on('add', function(item){
-          item.should.eql('foo')
-          done()
-        })
-        pager.push('foo')
-      })
-      it('should', function(){
-      })
-    })
-
-  })
-
 })
