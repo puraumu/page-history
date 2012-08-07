@@ -58,6 +58,12 @@ describe('Pager', function(){
     })
   })
 
+  describe('.index()', function(){
+    it('should return the page of index', function(){
+      pager.index('hoge').should.eql(3)
+    })
+  })
+
   describe('.action()', function(){
     it('should register an action', function(){
       pager.action('next')._action.should.eql('next')
