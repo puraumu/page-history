@@ -64,13 +64,24 @@ describe('Pager', function(){
     })
     it('should not invoke noop', function(){
       // => events
-
     })
   })
 
   describe('.push()', function(){
-    it('should', function(){
-      pager.push('node').page[--pager.len].should.eql('node')
+    it('should add a new page', function(){
+      var len = pager.len;
+      pager.push('node')
+      len += 1
+      pager.page[len -1].should.eql('node')
+      len.should.eql(pager.len)
+    })
+    it('should add new multiple pages', function(){
+      var len = pager.len;
+      pager.push(['ssh:', 'ftp:'])
+      len += 2
+      pager.page[len - 1].should.eql('ftp:')
+      pager.page[len - 2].should.eql('ssh:')
+      len.should.eql(pager.len)
     })
   })
 
