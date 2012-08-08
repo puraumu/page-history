@@ -1,6 +1,6 @@
 # History
 
-`history` aims to works like browser history.
+`history` aims to work like browser history.
 
 ## Methods
 
