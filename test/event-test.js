@@ -1,14 +1,14 @@
 var assert = require('assert')
   , should = require('should')
   , Pager = require('../')
-  , pager = new Pager()
+  , pager = Pager()
   , page = ['foo', 'bar', 'baz', 'hoge', 'FOO', 'BAR', 'HOGE']
 
 describe('Pager Events', function(){
 
   describe('new', function(){
     it('should read arument', function(){
-      pager = new Pager(page)
+      pager = Pager(page)
       pager.page.should.not.be.empty
     })
   })
