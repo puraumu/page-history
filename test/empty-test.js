@@ -1,14 +1,14 @@
 var assert = require('assert')
   , should = require('should')
-  , Pager = require('../')
-  , pager = new Pager()
+  , history = require('../')
+  , pager = history()
   , page = ['foo', 'bar', 'baz', 'hoge', 'FOO', 'BAR', 'HOGE']
 
 describe('When Pager is empty', function(){
 
   describe('new', function(){
     it('should be initialized', function(){
-      pager = new Pager();
+      pager = history();
       pager.page.should.be.empty;
     })
   })

@@ -1,14 +1,14 @@
 var assert = require('assert')
   , should = require('should')
-  , Pager = require('../')
-  , pager = new Pager()
+  , history = require('../')
+  , pager = history()
   , page = ['foo', 'bar', 'baz', 'hoge', 'FOO', 'BAR', 'HOGE']
 
 describe('Pager', function(){
 
   describe('new', function(){
     it('should read arument', function(){
-      pager = new Pager(page);
+      pager = history(page);
       pager.page.should.not.be.empty;
     })
   })
