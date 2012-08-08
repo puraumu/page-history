@@ -82,6 +82,7 @@ describe('When Pager is empty', function(){
   describe('.remove()', function(){
     it('should do nothing or return self', function(){
       pager.remove(0).should.eql(pager)
+      pager.cwp.should.eql(0)
       pager.len.should.eql(0)
       pager.page.should.be.empty
     })
