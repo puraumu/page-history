@@ -84,6 +84,7 @@ pager.len; // 9
 
 `Add` an item at index by specifying index number and an item. When item added at the place before current focus, the focus moves to keep current focus. This case is also apply to `remove` method.
 
+``` javascript
 pager.add(0, 'http://en.wikipedia.org/');
 pager.index('http://en.wikipedia.org/'); // 0
 pager.now(); // 'https://github.com/about'
@@ -92,4 +93,4 @@ pager.index('https://github.com/about') // 7
 pager.remove(0);
 pager.now(); // 'https://github.com/about'
 pager.index('https://github.com/about'); 6
-
+```
