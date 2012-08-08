@@ -35,13 +35,6 @@ describe('Pager TypeCheck', function(){
     // })
   })
 
-  describe('.action()', function(){
-    it('', function(){
-      pager.action(3)._action.should.be.empty
-      pager.action('foo', 'hoge')._callback.should.be.a('function')
-    })
-  })
-
   describe('.push()', function(){
     // it('', function(){
     // })

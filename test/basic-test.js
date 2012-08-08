@@ -187,30 +187,6 @@ describe('Pager', function(){
     })
   })
 
-  describe('.action() registers an action.', function(){
-    it('should not change cwp', function(){
-      var cwp = pager.cwp;
-      pager.action('next')._action.should.eql('next')
-      pager.cwp.should.eql(cwp)
-    })
-    it('should not change len', function(){
-      var len = pager.len;
-      pager.action('hoge')._action.should.eql('hoge')
-      pager.len.should.eql(len)
-    })
-    it('should not change page', function(){
-      var page = pager.page;
-      pager.action('')._action.should.eql('')
-      pager.page.should.eql(page)
-    })
-  })
-
-  describe('.action()', function(){
-    it('should not invoke noop', function(){
-      // => events
-    })
-  })
-
   describe('.push() adds a new page.', function(){
     it('should not change cwp', function(){
       var cwp = pager.cwp;
