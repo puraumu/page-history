@@ -13,7 +13,7 @@ describe('Pager Events', function(){
     })
   })
 
-  describe('move', function(){
+  describe('`move`', function(){
     it('should return current page #1', function(done){
       pager.once('move', function(d, i){
         d.should.eql('FOO')
@@ -53,7 +53,7 @@ describe('Pager Events', function(){
     })
   })
 
-  describe('end', function(){
+  describe('`end`', function(){
     it('should return the end of page #1', function(done){
       pager.once('end', function(d, i){
         d.should.eql('HOGE')
@@ -80,7 +80,7 @@ describe('Pager Events', function(){
     })
   })
 
-  describe('top', function(){
+  describe('`top`', function(){
     it('should return the top of page #1', function(done){
       pager.once('top', function(d, i){
         d.should.eql('foo')
@@ -107,7 +107,7 @@ describe('Pager Events', function(){
     })
   })
 
-  describe('add', function(){
+  describe('`add`', function(){
     it('should return an added item #1', function(done){
       pager.once('add', function(d, i){
         d.should.eql('http:')
@@ -122,8 +122,8 @@ describe('Pager Events', function(){
       pager.once('add', function(d, i){
         d.should.eql(['ssh:', 'git:'])
         i.should.eql(8)
-        pager.page[8].should.eql('ssh:')
-        pager.len.should.eql(10)
+        pager.page[8].should.eql(['ssh:', 'git:'])
+        pager.len.should.eql(9)
         done()
       })
       pager.push(['ssh:', 'git:'])
@@ -133,7 +133,7 @@ describe('Pager Events', function(){
         d.should.eql('ftp:')
         i.should.eql(0)
         pager.page[0].should.eql('ftp:')
-        pager.len.should.eql(11)
+        pager.len.should.eql(10)
         done()
       })
       pager.add(0, 'ftp:')
@@ -149,15 +149,15 @@ describe('Pager Events', function(){
     it('should emit event even if add to out of range #2', function(done){
       pager.once('add', function(d, i){
         d.should.eql('pop3')
-        i.should.eql(12)
-        pager.page[12].should.eql('pop3')
+        i.should.eql(11)
+        pager.page[11].should.eql('pop3')
         done()
       })
       pager.add(9204, 'pop3')
     })
   })
 
-  describe('remove', function(){
+  describe('`remove`', function(){
     it('should return a removed item #1', function(done){
       pager.once('remove', function(d, i){
         d.should.eql('sftp:')
@@ -192,7 +192,7 @@ describe('Pager Events', function(){
     })
   })
 
-  describe('change', function(){
+  describe('`change`', function(){
     it('should return arguments at any time #1 succeed', function(done){
       pager.once('change', function(d, i){
         d.should.eql('foo')

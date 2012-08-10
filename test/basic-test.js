@@ -216,14 +216,14 @@ describe('Pager', function(){
     it('should change len', function(){
       var len = pager.len;
       pager.push(['', ''])
-      pager.len.should.eql(len + 2)
+      pager.len.should.eql(len + 1)
     })
     it('should change page', function(){
       var page = pager.page;
       pager.push([2, 99])
       // page.push([90, 34]) // Array push
       pager.page.should.eql(page)
-      pager.page[pager.len - 1].should.eql(99)
+      pager.page[pager.len - 1].should.eql([2, 99])
     })
   })
 
