@@ -21,9 +21,8 @@
 
 |Event|method|note|
 |:--|:--|:--|
-|move|`move()`, `next()`, `back()`|focus moved|
-|end|`move()`, `next()`|when focus hit the end of index|
-|top|`move()`, `back()`|when focus hit the top of index|
+|next|`move()`, `next()`|when focus moves to next index|
+|back|`move()`, `back()`|when focus moves to back index|
 |add|`push()`, `add()`|item added to history|
 |remove|`remove()`|item remvoed from history|
 |change|`set()`|stack changed|
